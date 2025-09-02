@@ -1,4 +1,4 @@
-package cyphers.records.search;
+package com.cprecords.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
