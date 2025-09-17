@@ -7,7 +7,10 @@
 <title>사퍼가싫어</title>
 <link rel="stylesheet" href="../resources/css/home.css">
 <link rel="shortcut icon" href="/favicon.ico">
-
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+	rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
+	crossorigin="anonymous">
+ -->
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -17,15 +20,34 @@
 <body>
 	<%@include file="includes/header.jsp"%>
 	<div class="search_wrapper">
-		search
+		<h3>전적 검색</h3>
+		<div>
+			<div class="searchBox_wrapper">
+				<input type="text" class="searchBox_input" placeholder="검색할 플레이어 닉네임 입력" name="player_id" value="">
+					<span class="searchBox_button">검색</span>
+			</div>
+		</div>
 	</div>
+	<div class="search_result_wrapper">
+		플레이어 정보
 	</div>
+</div>
 <script>
 
 
-$('#fold_menu').on("click",function(e){
-	e.preventDefault();
+$('.fold_menu').on("click",function(e){
+	$("#sidebar-nav").css("width","200px");
 	console.log('성공');
+});
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("sidebar-nav").style.width = "0";
+    console.log('닫힘');
+}
+
+$('.searchBox_button').on("click",function(e){
+	console.log($("input[name='player_id']").val()+'아이디');
 });
 </script>
 </body>

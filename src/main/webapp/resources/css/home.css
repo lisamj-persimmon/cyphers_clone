@@ -1,9 +1,10 @@
 @charset "UTF-8";
 .wrapper{
+	font-family: "Lato", sans-serif;
 	display : flex;
 	flex-direction : column;
 	align-items: center;
-	position: relative
+	position: relative; 
 }
 .header_wrapper
 {	
@@ -29,12 +30,79 @@
 	margin-right: 7px;
 }
 
+.sidenav{
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1; 
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	padding-top : 60px;
+	transition: 0.2s;
+	opacity: 0.9;
+	/* filter: alpha(opacity=50); */
+}
+
+.sidenav a{
+	padding: 8px 8px 8px 32px;
+  	text-decoration: none;
+  	font-size: 25px;
+  	color: #818181;
+  	display: block;
+  	transition: 0.3s;
+}
+
+.sidenav a:hover, offcanvas a:focus{
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 40px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+/*검색창*/
 .search_wrapper{
-	
 	position:absolute;
 	top: 90px;
-	left: 0px;
-	right: 0px;
+	left: 10%;
+	right: 10%;
 	background-color: #d3f8f4;
+	padding: 30px;
+}
+
+.searchBox_input{
+	border: none;
+	width: 70%;
+	margin: 5px 0px;
+	border-bottom: 1px solid #4f30677d;
+	
+	padding: 7px 9px;
+    overflow: hidden;
+    background: transparent;
+    font-weight: 500;
+    font-size: 14px;
+	
+}
+.searchBox_button{
+	padding: 10px;
+	font-weight: 500px;
+}
+/*검색 결과*/
+.search_result_wrapper{
+	position:absolute;
+	top: 260px;
+	left: 10%;
+	right: 10%;
+	background-color: #408080;
 	padding: 30px;
 }
