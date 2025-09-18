@@ -23,8 +23,10 @@
 		<h3>전적 검색</h3>
 		<div>
 			<div class="searchBox_wrapper">
-				<input type="text" class="searchBox_input" placeholder="검색할 플레이어 닉네임 입력" name="player_id" value="">
+				<form>
+					<input type="text" class="searchBox_input" placeholder="검색할 플레이어 닉네임 입력" name="player_id" value="">
 					<span class="searchBox_button">검색</span>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -46,9 +48,35 @@ function closeNav() {
     console.log('닫힘');
 }
 
-$('.searchBox_button').on("click",function(e){
-	console.log($("input[name='player_id']").val()+'아이디');
-});
+/* $('.searchBox_button').on("click",function(e){
+	
+}); */
+
+var main = {
+	init : function () {
+		var _this = this;
+		$('.searchBox_button').on('click', function () {
+	    	_this.find();
+	   	});
+	},
+	find : function () {
+		var keyword = $("input[name='player_id']").val();
+		console.log($("input[name='player_id']").val()+'아이디');
+
+		$.ajax({
+	    	type: 'GET',
+	        url: '/api/v1/userInfo/'+keyword, 
+	        dataType: 'json',
+	        contentType:'application/json; charset=utf-8',
+	    }).done(function(res) {
+	    	alert(JSON.stringify(res));
+	    }).fail(function (error) {
+	    	alert(JSON.stringify(error));
+	    	});
+	}
+};
+
+main.init();
 </script>
 </body>
 </html>
