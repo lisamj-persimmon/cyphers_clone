@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * Handles requests for the application home page.
@@ -35,17 +38,16 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
 		return "home";
 	}
 	
 	/*
-	 * @RequiredArgsConstructor
+	 * @RequestMapping(value="/userInfo", method=RequestMethod.GET)
 	 * 
-	 * @RestController public class UserInfoController{ private final
-	 * UserInfoService userInfoService;
-	 * 
-	 * @GetMapping("/api/v1/userInfo/{keyword}") public }
+	 * @ResponseBody public String userInfoPOST(String nickname) throws Exception{
+	 * logger.info(nickname+"닉네임"); return nickname+"닉네임이다"; }
 	 */
 	
+	
+	 
 }

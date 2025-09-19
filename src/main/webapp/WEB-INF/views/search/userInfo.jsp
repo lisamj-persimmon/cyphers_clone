@@ -18,7 +18,7 @@
 </head>
 </head>
 <body>
-	<%@include file="includes/header.jsp"%>
+	<%@include file="../includes/header.jsp"%>
 	<div class="search_wrapper">
 		<h3>전적 검색</h3>
 		<div>
@@ -32,6 +32,26 @@
 	</div>
 	<div class="search_result_wrapper">
 		플레이어 정보
+		<table>
+			<thead>
+				<tr>
+					<th>닉네임</th>
+					<th>ID</th>
+					<th>캐릭터Id</th>
+					<th>캐릭터이름</th>
+					<th>급수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>${player.nickname}</th>
+					<th>${player.playerId}</th>
+					<th>${player.represent.characterId}</th>
+					<th>${player.represent.characterName}</th>
+					<th>${player.grade}</th>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
 <script>
@@ -48,11 +68,9 @@ function closeNav() {
     console.log('닫힘');
 }
 
-$('.searchBox_button').on("click",function(e){
-	e.preventDefault();
-	moveForm.attr("action","/search/userInfo");
-	moveForm.submit();
-});
+/* $('.searchBox_button').on("click",function(e){
+	
+}); */
 
 var main = {
 	init : function (e) {
@@ -73,7 +91,7 @@ var main = {
 	}
 };
 
-/* main.init(); */
+main.init();
 </script>
 </body>
 </html>
