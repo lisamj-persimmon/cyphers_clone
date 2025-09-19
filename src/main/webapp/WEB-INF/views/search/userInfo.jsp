@@ -36,17 +36,17 @@
 			<thead>
 				<tr>
 					<th>닉네임</th>
-					<th>ID</th>
-					<th>캐릭터Id</th>
-					<th>캐릭터이름</th>
+					<th>현재RP</th>
+					<th>클랜이름</th>
+					<th>대표캐릭터</th>					
 					<th>급수</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th>${player.nickname}</th>
-					<th>${player.playerId}</th>
-					<th>${player.represent.characterId}</th>
+					<th>${player.ratingPoint}</th>
+					<th>${player.clanName}</th>
 					<th>${player.represent.characterName}</th>
 					<th>${player.grade}</th>
 				</tr>

@@ -50,28 +50,7 @@ public class UserInfoController {
 	@GetMapping("/userInfo")
 	public String userInfoGET(@RequestParam String nickname, Model model) throws Exception{
 		System.out.println(nickname+"AAAA");
-		/*RestTemplate restTemplate = new RestTemplate();
-        
-        // 1. 닉네임으로 ouid(Open User ID) 조회
-        String searchOuidUrl = API_BASE_URL + "/cy/players?nickname=" + nickname + "&wordType=match&apikey=" + apiKey;
-        ResponseEntity<Map> ouidResponse = restTemplate.getForEntity(searchOuidUrl, Map.class);
-        
-        if (ouidResponse.getStatusCode().is2xxSuccessful() && ouidResponse.getBody() != null) {
-            Map body = ouidResponse.getBody();
-            if (body.containsKey("rows") && !((java.util.List) body.get("rows")).isEmpty()) {
-                Map player = (Map) ((java.util.List) body.get("rows")).get(0);
-                String ouid = (String) player.get("playerId");
-
-                // 2. ouid를 사용하여 플레이어 상세 정보 조회
-                String playerDetailUrl = API_BASE_URL + "/cy/players/" + ouid + "?apikey=" + apiKey;
-                ResponseEntity<Map> detailResponse = restTemplate.getForEntity(playerDetailUrl, Map.class);
-                
-                // 3. Model에 데이터 추가
-                if (detailResponse.getStatusCode().is2xxSuccessful() && detailResponse.getBody() != null) {
-                    model.addAttribute("playerData", detailResponse.getBody());
-                    return "/search/userInfo";
-                }
-            }*/
+		
         log.info("uri 생성:");
         String encodeNickname = URLEncoder.encode(nickname,"UTF-8");	//닉네임 인코딩
         System.out.println(encodeNickname+"바보바보");
@@ -80,8 +59,6 @@ public class UserInfoController {
         System.out.println(searchUserInfo+"로그로그");
 
         URI uri = new URI(searchUserInfo);
-        log.info(searchUserInfo+"로그로그");
-        log.info("Request 요청 준비");
 		
 		RequestEntity<Void> requestEntity = RequestEntity.get(uri).build();
 		
@@ -106,10 +83,24 @@ public class UserInfoController {
 		PlayerVO player =  response.getRows().get(0);
 		
 		String playerId = player.getPlayerId();
-        
+		String searchUserDetail = API_BASE_URL + "/cy/players/" + playerId + "?apikey=" + apiKey;
+		
+		ResponseEntity<PlayerVO> DetailEntity = restTemplate.getForEntity(searchUserDetail, PlayerVO.class);
+		System.out.println(DetailEntity.getBody()+"상세ㅔㅔㅔㅔㅔ");
+		
+		PlayerVO detailString = DetailEntity.getBody();
+		
+		//JSON 문자열 최상위(상세!!!) VO 클래스로 변환
+		
+		
+		/*
+		 * ResponseEntity<String> detailResponse =
+		 * restTemplate.exchange(requestEntity,String.class);
+		 */
+		
         System.out.println("fffffff"+player);
 		
-		model.addAttribute("player", player);
+		model.addAttribute("player", detailString);
 		
 		return "/search/userInfo";
 	}
