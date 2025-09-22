@@ -25,5 +25,7 @@ public class gameTypeVO {
 	//중단 수
 	private int stopCount;
 	
+	//플레이 수(일반)
+	private int playCount;
 	
 }

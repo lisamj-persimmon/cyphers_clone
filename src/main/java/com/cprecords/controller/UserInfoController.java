@@ -26,6 +26,7 @@ import com.mysql.cj.xdevapi.JsonString;
 import com.cprecords.model.PlayerVO;
 import com.cprecords.model.RepresentVO;
 import com.cprecords.model.SearchResponseVO;
+import com.cprecords.model.gameTypeVO;
 import com.cprecords.service.SearchService;
 
 import lombok.RequiredArgsConstructor;
@@ -90,8 +91,18 @@ public class UserInfoController {
 		
 		PlayerVO detailString = DetailEntity.getBody();
 		
-		//JSON 문자열 최상위(상세!!!) VO 클래스로 변환
+		//공식/일반 승리수 계산 로직 0-rating 1-normal
+		gameTypeVO rating = detailString.getRecords().get(0);
+		detailString.setRat_winCount(rating.getWinCount());
+		detailString.setRat_loseCount(rating.getLoseCount());
+		detailString.setRat_stopCount(rating.getStopCount());
+		detailString.setRat_total(rating.getWinCount()+rating.getLoseCount()+rating.getStopCount());
 		
+		gameTypeVO normal = detailString.getRecords().get(1);
+		detailString.setNor_total(normal.getPlayCount());
+		
+		System.out.println(detailString.getRecords().get(0));
+		System.out.println(detailString.getRecords().get(1));
 		
 		/*
 		 * ResponseEntity<String> detailResponse =

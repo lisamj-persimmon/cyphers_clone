@@ -7,11 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString
 @NoArgsConstructor
 @Getter
+@Setter
 @EqualsAndHashCode
 public class PlayerVO {
 	
@@ -45,6 +47,27 @@ public class PlayerVO {
 		
 		//게임 종류와 수
 		private List<gameTypeVO> records;
+		
+		
+		/* 일반, 공식 플레이 수 분리 및 전체 카운트 */
+		//일반 전체 플레이 수
+		private int nor_total;
+		
+		//공식 전체 플레이 수
+		private int rat_total;
+		
+		//공식 승리 수
+		private int rat_winCount;
+		
+		//공식 패배 수
+		private int rat_loseCount;
+		
+		//공식 중단 수
+		private int rat_stopCount;
+		
+		
+		
+		
 		
 	
 }
