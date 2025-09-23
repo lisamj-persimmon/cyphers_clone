@@ -65,9 +65,4 @@ public class PlayerVO {
 		//공식 중단 수
 		private int rat_stopCount;
 		
-		
-		
-		
-		
-	
 }

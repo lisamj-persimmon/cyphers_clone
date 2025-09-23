@@ -110,6 +110,11 @@ public class UserInfoController {
 		 */
 		
         System.out.println("fffffff"+player);
+        
+        
+        
+        
+        
 		
 		model.addAttribute("player", detailString);
 		
