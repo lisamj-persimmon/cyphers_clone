@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class partyInfoVO {
+public class PartyInfoVO {
 	
 	//플레이어 아이디
 	private String playerId;

@@ -26,7 +26,9 @@ import com.mysql.cj.xdevapi.JsonString;
 import com.cprecords.model.PlayerVO;
 import com.cprecords.model.RepresentVO;
 import com.cprecords.model.SearchResponseVO;
-import com.cprecords.model.gameTypeVO;
+import com.cprecords.model.GameTypeVO;
+import com.cprecords.model.MatchOverallVO;
+import com.cprecords.model.MatchesVO;
 import com.cprecords.service.SearchService;
 
 import lombok.RequiredArgsConstructor;
@@ -83,6 +85,7 @@ public class UserInfoController {
 		//변환된 객체에서 데이터를 가져와 사용
 		PlayerVO player =  response.getRows().get(0);
 		
+		
 		String playerId = player.getPlayerId();
 		String searchUserDetail = API_BASE_URL + "/cy/players/" + playerId + "?apikey=" + apiKey;
 		
@@ -92,32 +95,53 @@ public class UserInfoController {
 		PlayerVO detailString = DetailEntity.getBody();
 		
 		//공식/일반 승리수 계산 로직 0-rating 1-normal
-		gameTypeVO rating = detailString.getRecords().get(0);
+		GameTypeVO rating = detailString.getRecords().get(0);
 		detailString.setRat_winCount(rating.getWinCount());
 		detailString.setRat_loseCount(rating.getLoseCount());
 		detailString.setRat_stopCount(rating.getStopCount());
 		detailString.setRat_total(rating.getWinCount()+rating.getLoseCount()+rating.getStopCount());
 		
-		gameTypeVO normal = detailString.getRecords().get(1);
+		GameTypeVO normal = detailString.getRecords().get(1);
 		detailString.setNor_total(normal.getPlayCount());
 		
 		System.out.println(detailString.getRecords().get(0));
 		System.out.println(detailString.getRecords().get(1));
 		
-		/*
-		 * ResponseEntity<String> detailResponse =
-		 * restTemplate.exchange(requestEntity,String.class);
-		 */
+		//playerId 통해 매칭 정보 리스트 가져오기 -- 일반
+		//https://api.neople.co.kr/cy/players/<playerId>/matches?gameTypeId=<gameTypeId>&startDate=<startDate>&endDate=<endDate>&limit=<limit>&next=<next>&apikey=<apikey>
+		String searchMatchInfo = API_BASE_URL+"/cy/players/"+playerId+"/matches?gameTypeId="+"normal"+"&limit=<limit>&apikey="+apiKey;
+		System.out.println(searchMatchInfo+"매치정보");
 		
-        System.out.println("fffffff"+player);
-        
-        
-        
-        
-        
+		ResponseEntity<PlayerVO> matchEntity = restTemplate.getForEntity(searchMatchInfo, PlayerVO.class);
+		System.out.println(matchEntity.getBody()+"매치ㅣㅣㅣ");
 		
-		model.addAttribute("player", detailString);
+		//매칭기록 getbody
+		PlayerVO matchString = matchEntity.getBody();
+		//매칭기록이 없어서 매칭상세정보를 못 가져올 경우의 오류 없애기
+		if(detailString.getNor_total()!=0 && detailString.getRat_total()!=0) {
+			MatchOverallVO matchList = matchString.getMatches().getRows().get(0);
+			List<MatchOverallVO> matchList2 = matchString.getMatches().getRows();
+			
+			
+			
+			System.out.println(matchList.getPlayInfo()+"흠냐");
+			System.out.println("tttt"+matchList2);
+			
+			System.out.println(matchList+"aaaaa");
+			
+	        System.out.println("fffffff"+player);
+	
+			model.addAttribute("player", matchString);
+			model.addAttribute("matchList", matchList2);
+		}else {
+			System.out.println(matchString+"eeeee");
+			model.addAttribute("player", matchString);
+		}
+		
 		
 		return "/search/userInfo";
 	}
+
+	
+	
 }

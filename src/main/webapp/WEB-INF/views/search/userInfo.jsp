@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,41 +64,29 @@
 				</tr>
 			</tbody>
 		</table>
+		<c:if test="${matchList != 'empty'}">	
+			<table class="match_table">	
+				<thead>
+					<tr>
+						<td>맵</td>
+						<td>캐릭터</td>
+						<td>레벨</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${matchList}" var="matchList">
+						<tr>
+							<th><c:out value="${matchList.map.name}"></c:out></th>
+							<th><c:out value="${matchList.playInfo.characterName}"></c:out></th>
+							<th><c:out value="${matchList.playInfo.level}"></c:out></th>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
 	</div>
 	<!-- 전적 세부 div -->
-	<div class="search_result_wrapper">
-		플레이어 정보
-		<table>
-			<thead>
-				<tr>
-					<th>닉네임</th>
-					<th>현재RP</th>
-					<th>티어</th>
-					<th>클랜이름</th>
-					<th>대표캐릭터</th>					
-					<th>급수</th>
-					<th>공식전 전체</th>
-					<th style="font-size: 10px">공식전 승리/패배/중단</th>
-					<th>일반전 전체</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>${player.nickname}</th>
-					<th>${player.ratingPoint}</th>
-					<th>${player.tierName}</th>
-					<th>${player.clanName}</th>
-					<th>${player.represent.characterName}</th>
-					<th>${player.grade}</th>
-					<th>${player.rat_total}</th>
-					<th style="font-size: 10px">${player.rat_winCount}/${player.rat_loseCount}/${player.rat_stopCount}</th>
-					<th>${player.nor_total}</th>
-					<th></th>
-					
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	
 </div>
 <script>
 let moveForm = $("#userForm");

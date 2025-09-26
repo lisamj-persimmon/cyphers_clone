@@ -14,21 +14,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class matchesVO {
+public class MatchOverallVO {
 	
-	//검색 날짜 범위
-	private List<searchDate> date; 
+	//String으로 바꿈
+	private String date;
 	
-	private String gameTypeId;
+	private String matchId;
 	
-	private String next;
+	//맵이름, 코드 vo
+	private MapInfoVO map;
 	
-	private List<matchOverallVO> rows;
-
-
-	@Data
-	private static class searchDate{
-		private Date start;
-		private Date end;
-	}
+	//게임내 파티원, 본인 정보
+	private PlayInfoVO playInfo;
+		
+	
 }

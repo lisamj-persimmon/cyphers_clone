@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class gameTypeVO {
+public class GameTypeVO {
 	
 	//게임 종류(일반/공식)
 	private String gameTypeId;

@@ -46,8 +46,10 @@ public class PlayerVO {
 		private String tierName;
 		
 		//게임 종류와 수
-		private List<gameTypeVO> records;
+		private List<GameTypeVO> records;
 		
+		//매치 리스트 받아오기
+		private MatchesVO matches;
 		
 		/* 일반, 공식 플레이 수 분리 및 전체 카운트 */
 		//일반 전체 플레이 수
