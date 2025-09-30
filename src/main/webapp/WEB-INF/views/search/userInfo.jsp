@@ -34,7 +34,7 @@
 	</div>
 	<div class="search_result_wrapper">
 		플레이어 정보
-		<table>
+		<table class="playerInfo_table">
 			<thead>
 				<tr>
 					<th>닉네임</th>
@@ -64,8 +64,12 @@
 				</tr>
 			</tbody>
 		</table>
+		
+	</div>
+	<!-- 전적 목록 div -->
+	<div class="matchRes_List">
 		<c:if test="${matchList != 'empty'}">	
-			<table class="match_table">	
+			<%-- <table class="match_table">	
 				<thead>
 					<tr>
 						<td>맵</td>
@@ -82,11 +86,25 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-			</table>
+			</table> --%>
+			<c:forEach items="${matchList}" var="matchList">
+				<div class="GameLog_wrapper">
+					<div class="GameLog_header"> 
+						<c:out value="${matchList.date}"></c:out>
+					</div>
+					<div class="GameLog_body">
+						<c:out value="${matchList.map.name}"></c:out>
+						<img src="https://img-api.neople.co.kr/cy/characters/${matchList.playInfo.characterId}?zoom=<zoom>">
+						<c:out value="${matchList.playInfo.characterName}"></c:out>
+						<c:out value="${matchList.playInfo.level}"></c:out>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
+		<c:if test="${matchList == 'empty' }">
+			전적없음
 		</c:if>
 	</div>
-	<!-- 전적 세부 div -->
-	
 </div>
 <script>
 let moveForm = $("#userForm");

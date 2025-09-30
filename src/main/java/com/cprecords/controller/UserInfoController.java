@@ -117,12 +117,13 @@ public class UserInfoController {
 		
 		//매칭기록 getbody
 		PlayerVO matchString = matchEntity.getBody();
+		
 		//매칭기록이 없어서 매칭상세정보를 못 가져올 경우의 오류 없애기
-		if(detailString.getNor_total()!=0 && detailString.getRat_total()!=0) {
+		if(detailString.getNor_total()!=0 || detailString.getRat_total()!=0) {
 			MatchOverallVO matchList = matchString.getMatches().getRows().get(0);
 			List<MatchOverallVO> matchList2 = matchString.getMatches().getRows();
 			
-			
+			System.out.println("매치스트링"+matchString);
 			
 			System.out.println(matchList.getPlayInfo()+"흠냐");
 			System.out.println("tttt"+matchList2);
@@ -132,10 +133,14 @@ public class UserInfoController {
 	        System.out.println("fffffff"+player);
 	
 			model.addAttribute("player", matchString);
+			model.addAttribute("player", detailString);
+			
 			model.addAttribute("matchList", matchList2);
 		}else {
 			System.out.println(matchString+"eeeee");
 			model.addAttribute("player", matchString);
+			model.addAttribute("matchList", "empty");
+			
 		}
 		
 		
