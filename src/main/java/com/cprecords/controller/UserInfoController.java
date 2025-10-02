@@ -109,7 +109,7 @@ public class UserInfoController {
 		
 		//playerId 통해 매칭 정보 리스트 가져오기 -- 일반
 		//https://api.neople.co.kr/cy/players/<playerId>/matches?gameTypeId=<gameTypeId>&startDate=<startDate>&endDate=<endDate>&limit=<limit>&next=<next>&apikey=<apikey>
-		String searchMatchInfo = API_BASE_URL+"/cy/players/"+playerId+"/matches?gameTypeId="+"normal"+"&limit=<limit>&apikey="+apiKey;
+		String searchMatchInfo = API_BASE_URL+"/cy/players/"+playerId+"/matches?gameTypeId="+"rating"+"&limit=<limit>&apikey="+apiKey;
 		System.out.println(searchMatchInfo+"매치정보");
 		
 		ResponseEntity<PlayerVO> matchEntity = restTemplate.getForEntity(searchMatchInfo, PlayerVO.class);
@@ -131,10 +131,10 @@ public class UserInfoController {
 			System.out.println(matchList+"aaaaa");
 			
 	        System.out.println("fffffff"+player);
-	
+	        
 			model.addAttribute("player", matchString);
 			model.addAttribute("player", detailString);
-			
+			model.addAttribute("matchType", "일반");
 			model.addAttribute("matchList", matchList2);
 		}else {
 			System.out.println(matchString+"eeeee");
@@ -146,7 +146,14 @@ public class UserInfoController {
 		
 		return "/search/userInfo";
 	}
-
 	
+	
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	@GetMapping("/matchDetail")
+	public String matchInfoGET(@RequestParam String matchId, Model model) throws Exception{
+	
+		
+		return "/search/matchDetail";
+	}
 	
 }
